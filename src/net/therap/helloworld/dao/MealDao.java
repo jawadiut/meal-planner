@@ -33,7 +33,7 @@ public class MealDao {
     }
 
     public void updateMeal(Meal meal){
-        //String query = "DELETE FROM MEAL WHERE mealId = "+meal.getMealId();
+
         String query = "UPDATE MealPlan SET mealItem = ?, mealDate = ?, mealType = ?";
         ResultSet resultSet = null;
         try{

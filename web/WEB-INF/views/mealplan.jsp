@@ -48,11 +48,11 @@
             tablecell.firstChild.focus();
         }
         function submitNewName(textfield) {
-            //alert(textfield.value);
+
             document.getElementById("h").value = textfield.value;
             textfield.parentNode.innerHTML = textfield.value;
         }
-        //document.write("I dont know anything")
+
         function changeTable(tablecell) {
             tablecell.innerHTML = "<textarea name='textfield' rows=\"5\" cols=\"120\" onblur='submitNewName(this)' onclick='submitNewName(this)'>" + tablecell.innerHTML + "</textarea>";
             tablecell.firstChild.focus();
@@ -60,9 +60,9 @@
         function keyPressed(e) {
             var key;
             if (window.event)
-                key = window.event.keyCode; //IE
+                key = window.event.keyCode;
             else
-                key = e.which; //firefox
+                key = e.which;
 
             return (key != 13);
         }
@@ -86,8 +86,7 @@
 
 
             }
-            //document.selectedValue.value = meals;
-            //document.f1.submit();
+
         }
         function Alert() {
 

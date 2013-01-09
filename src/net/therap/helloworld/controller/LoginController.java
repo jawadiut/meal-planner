@@ -24,7 +24,7 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 @WebServlet("/login")
-public class loginController extends HttpServlet{
+public class LoginController extends HttpServlet{
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //super.doGet(req, resp);    //To change body of overridden methods use File | Settings | File Templates.
@@ -45,7 +45,7 @@ public class loginController extends HttpServlet{
         boolean isTrue = userDao.authenticateUser(user);
         String message = "username or password incorrect";
 
-        //ResultSet rs = null;
+
 
 
             if(isTrue){
@@ -53,7 +53,6 @@ public class loginController extends HttpServlet{
 
                 user = userDao.isAdmin(user);
                 session.setAttribute("isadmin",user.getISADMIN());
-                //System.out.println("session: "+session.getId());
                 session.setAttribute("username",user.getUserName());
                 resp.sendRedirect("mealplan");
 

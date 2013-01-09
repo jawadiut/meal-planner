@@ -41,9 +41,8 @@ public class MealPlanController extends HttpServlet {
         Object attribute = session.getAttribute("isadmin");
 
         sv = (String) (req.getParameter("cmb"));
-        //System.out.println(sv);
         req.setAttribute("combo", sv);
-        doChecking(usernames, comments, sv);
+        addComment(usernames, comments, sv);
         showMeals(mealItem, mealDate, mealType);
         req.setAttribute("usernames", usernames);
         req.setAttribute("comments", comments);
@@ -76,30 +75,32 @@ public class MealPlanController extends HttpServlet {
         java.util.Date date= new java.util.Date();
         sv = (String) (req.getParameter("cmb"));
         CommentDao commentDao = new CommentDao();
-        //System.out.println("submit: " + submit);
+
+        /********ADMIN_MENU_CHANGE********************/
         if (submit.equals("menuchange")) {
-            //System.out.println("menu changed....");
+
             MealDao mealDao = new MealDao();
             Meal meal = new Meal();
-            //System.out.println("textfield: " + req.getParameter("hide"));
             meal.setMealItem(req.getParameter("hide"));
             meal.setMealDate(new Timestamp(date.getTime()));
             meal.setMealType(sv);
             mealDao.updateMeal(meal);
-            doChecking(usernames, comments, sv);
+            addComment(usernames, comments, sv);
             showMeals(mealItem, mealDate, mealType);
 
 
-        } else {
+        }
+
+        /**********POST_COMMENT**********************/
+        else {
             Comment com = new Comment();
 
-            System.out.println("post: " + sv);
             com.setUserName((String) session.getAttribute("username"));
             com.setComment(req.getParameter("commentArea"));
             com.setMealtype(sv);
 
             commentDao.saveComment(com);
-            doChecking(usernames, comments, sv); //process comments.........
+            addComment(usernames, comments, sv); //process comments.........
 
             showMeals(mealItem, mealDate, mealType);
             req.setAttribute("combo", sv);
@@ -115,7 +116,7 @@ public class MealPlanController extends HttpServlet {
 
     }
 
-    public void doChecking(List<String> usernames, List<String> comments, String sv) {
+    public void addComment(List<String> usernames, List<String> comments, String sv) {
 
         CommentDao commentDao = new CommentDao();
         //process comments.........

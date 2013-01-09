@@ -23,7 +23,7 @@ import java.util.Map;
  * To change this template use File | Settings | File Templates.
  */
 @WebServlet("/helloworld.html")
-public class helloworldController extends HttpServlet {
+public class WelcomePageController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //super.doGet(req, resp);    //To change body of overridden methods use File | Settings | File Templates.
@@ -38,7 +38,7 @@ public class helloworldController extends HttpServlet {
         UserDao userDao = new UserDao();
         User user = new User();
 
-        //user.setId(req.getParameter("id"));
+
         user.setFirstName(req.getParameter("firstName"));
         user.setLastName(req.getParameter("lastName"));
         user.setUserName(req.getParameter("userName"));
@@ -47,18 +47,7 @@ public class helloworldController extends HttpServlet {
         user.setConfirmPassword(req.getParameter("confirmPassword"));
         user.setISADMIN(0);
         System.out.println(user);
-        /*String userName = req.getParameter("userName");
-        String firstName = req.getParameter("firstName");
-        String lastName = req.getParameter("lastName");
-        String password = req.getParameter("password");
-        String confirmPassword = req.getParameter("confirmPassword");*/
 
-
-        /*System.err.println(userName);
-        System.err.println(firstName);
-        System.err.println(lastName);
-        System.err.println(password);
-        System.err.println(confirmPassword);*/
         Map<String,String> message = new HashMap<String,String>();
         if(!validation(user,message)){
 
@@ -76,11 +65,9 @@ public class helloworldController extends HttpServlet {
             mp.put("password", user.getPassword());
             mp.put("confirmPassword", user.getConfirmPassword());
             userDao.saveUser(user);
-            //List<String> userlist = new ArrayList<String>();
-            //req.setAttribute("user",userlist);
+
             req.setAttribute("user", mp);
-            //RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/WEB-INF/views/usershow.jsp");
-            //requestDispatcher.forward(req, resp);
+
             resp.sendRedirect("login");
         }
     }

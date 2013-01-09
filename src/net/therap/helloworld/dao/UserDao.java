@@ -20,19 +20,16 @@ public class UserDao {
     public void saveUser(User user) {
         String query = "INSERT INTO User(firstName,lastName,userName,email,password,ISADMIN) VALUES (?,?,?,?,?,?)";
         try {
-            //System.out.println(user);
+
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            //preparedStatement.setInt(1,1);
+
             preparedStatement.setString(1, user.getFirstName());
             preparedStatement.setString(2, user.getLastName());
             preparedStatement.setString(3, user.getUserName());
             preparedStatement.setString(4, user.getEmail());
             preparedStatement.setString(5, user.getPassword());
             preparedStatement.setInt(6, user.getISADMIN());
-            /*ResultSet resultSet = preparedStatement.executeQuery();
-            while(resultSet.next()){
-                String
-            }*/
+
             preparedStatement.execute();
 
         } catch (SQLException e) {
@@ -69,14 +66,13 @@ public class UserDao {
         try{
             PreparedStatement statement = connection.prepareStatement(query);
             resultSet = statement.executeQuery();
-            //System.out.println("mewow");
+
 
             if(resultSet.next()){
-                //System.out.println("whttttt???");
+
             }
-            int meao = resultSet.getInt(7);
-            //System.out.println(meao);
-            user.setISADMIN(meao);
+
+            user.setISADMIN(resultSet.getInt(7));
 
 
         }catch (SQLException e){
