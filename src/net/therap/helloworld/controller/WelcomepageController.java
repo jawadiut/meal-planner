@@ -23,11 +23,11 @@ import java.util.Map;
  * To change this template use File | Settings | File Templates.
  */
 @WebServlet("/helloworld.html")
-public class WelcomePageController extends HttpServlet {
+public class WelcomepageController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //super.doGet(req, resp);    //To change body of overridden methods use File | Settings | File Templates.
-        RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/WEB-INF/views/helloworld.jsp");
+        RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/WEB-INF/views/welcomepage.jsp");
         requestDispatcher.forward(req, resp);
         System.out.println("doGet() called");
     }
@@ -52,7 +52,7 @@ public class WelcomePageController extends HttpServlet {
         if(!validation(user,message)){
 
             req.setAttribute("error",message);
-            req.getRequestDispatcher("/WEB-INF/views/helloworld.jsp").forward(req,resp);
+            req.getRequestDispatcher("/WEB-INF/views/welcomepage.jsp").forward(req,resp);
 
 
         }

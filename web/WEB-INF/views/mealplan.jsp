@@ -96,7 +96,7 @@
     </script>
 
 </head>
-<body style="background-color:aqua;"  onkeypress="return keyPressed(event)">
+<body style="background-color:aqua;" onkeypress="return keyPressed(event)">
 <p style="float: right;background-color: #87cefa;">
     <a href="/logout" style="text-decoration:none;color: blue;">Logout</a>
 </p>
@@ -109,16 +109,29 @@
     <div>
         <div>
             <label>Meal Type:</label>
+            <c:choose>
+                <c:when test="${not empty combo}">
+                    <select name="cmb" id="mt" onchange="isSelected(this.value)">
 
-            <select name="cmb" id="mt" onchange="isSelected(this.value)">
+                        <option value="lunch" <c:if test="${combo==\"lunch\"}">selected="selected" </c:if>>lunch</option>
+                        <option value="breakfast" <c:if test="${combo==\"breakfast\"}">selected="selected" </c:if>>breakfast</option>
 
-                <option value="lunch">Lunch</option>
-                <option value="breakfast">Breakfast</option>
+                        <option value="dinner" <c:if test="${combo==\"dinner\"}">selected="selected" </c:if>>dinner</option>
 
-                <option value="dinner">Dinner</option>
+                    </select>
+                </c:when>
+                <c:otherwise>
 
-            </select>
+                    <select name="cmb" id="mt" onchange="isSelected(this.value)">
 
+                        <option value="lunch">lunch</option>
+                        <option value="breakfast">breakfast</option>
+
+                        <option value="dinner">dinner</option>
+
+                    </select>
+                </c:otherwise>
+            </c:choose>
 
         </div>
         <br>
@@ -173,16 +186,16 @@
     </c:if>
     <c:if test="${not empty mealItem}">
         <c:forEach items="${mealItem}" varStatus="loop">
-        <table id="lctable" border="1" cellpadding="20px" align="center" class="MealTable">
-            <tr>
-                <th>${mealType[loop.index]}</th>
-            </tr>
-            <tr>
+            <table id="lctable" border="1" cellpadding="20px" align="center" class="MealTable">
+                <tr>
+                    <th>${mealType[loop.index]}</th>
+                </tr>
+                <tr>
 
-                <td class="MealCell" height="150px">${mealItem[loop.index]}</td>
+                    <td class="MealCell" height="150px">${mealItem[loop.index]}</td>
 
-            </tr>
-        </table>
+                </tr>
+            </table>
         </c:forEach>
     </c:if>
     <%--&lt;%&ndash;dinner table&ndash;%&gt;--%>

@@ -27,7 +27,7 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 @WebServlet("/mealplan")
-public class MealPlanController extends HttpServlet {
+public class MealplanController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //super.doGet(req, resp);    //To change body of overridden methods use File | Settings | File Templates.
@@ -50,6 +50,7 @@ public class MealPlanController extends HttpServlet {
         req.setAttribute("mealDate", mealDate);
         req.setAttribute("mealType", mealType);
         req.setAttribute("Isadmin", (Integer) attribute);
+        System.out.println(sv);
         RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/WEB-INF/views/mealplan.jsp");
         requestDispatcher.forward(req, resp);
 
@@ -111,6 +112,7 @@ public class MealPlanController extends HttpServlet {
         req.setAttribute("mealDate", mealDate);
         req.setAttribute("mealType", mealType);
         req.setAttribute("Isadmin", (Integer) session.getAttribute("isadmin"));
+        System.out.println(sv);
         RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/WEB-INF/views/mealplan.jsp");
         requestDispatcher.forward(req, resp);
 
